@@ -5,6 +5,7 @@ import Home from "./pages/home/Home";
 import { Login } from "./pages/login/Login";
 import { ForgotPassword } from "./pages/forgot-password/ForgotPassword";
 import { ChangePassword } from "./pages/change-password/ChangePassword";
+import { Dashboard } from "./pages/dashboard/Dashboard";
 
 const routes = createBrowserRouter([
   {
@@ -16,22 +17,26 @@ const routes = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login />
+        element: <Login />,
       },
       {
         path: "/forgot-password",
-        element: <ForgotPassword />
+        element: <ForgotPassword />,
       },
       {
         path: "/change-password/:resetToken",
-        element: <ChangePassword />
+        element: <ChangePassword />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
       },
       {
         path: "/",
-        element: <Home />
-      }
-    ]
-  }
+        element: <Home />,
+      },
+    ],
+  },
 ]);
 
 export default routes;

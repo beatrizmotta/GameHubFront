@@ -16,6 +16,9 @@ import { PasswordInput } from "../../components/password-input/PasswordInput";
 import { Button } from "../../components/ui/button";
 import type { LoginRequest } from "../../api/models/login.model";
 import AuthService from "../../api/services/auth.service";
+import { useNavigate } from "react-router";
+import { login } from "../../utils/auth.utils";
+import useUser from "../../stores/useUserStore";
 
 export const Login = () => {
   const {
@@ -26,8 +29,24 @@ export const Login = () => {
     resolver: zodResolver(LoginForm),
   });
 
+  const { setUser } = useUser();
+
+  const navigate = useNavigate();
+
   const loginMutation = useMutation({
     mutationFn: (request: LoginRequest) => AuthService.login(request),
+    onSuccess: (response) => {
+      const { token, email, fullName } = response.data;
+      login(token);
+
+      setUser({
+        username: fullName,
+        email,
+        token,
+      });
+
+      navigate("/dashboard");
+    },
   });
 
   const onSubmit = (data: loginUserFormData) => {
@@ -58,7 +77,12 @@ export const Login = () => {
                 <FieldLabel htmlFor="newPassword">Senha</FieldLabel>
                 <PasswordInput id="newPassword" {...register("password")} />
                 {errors.password && <span>{errors.password.message}</span>}
-                <a href="forgot-password" className="hover:underline text-start">Esqueci minha senha</a>
+                <a
+                  href="forgot-password"
+                  className="hover:underline text-start"
+                >
+                  Esqueci minha senha
+                </a>
               </Field>
             </FieldGroup>
           </form>
@@ -69,7 +93,7 @@ export const Login = () => {
             onClick={handleSubmit(onSubmit)}
             disabled={loginMutation.isSuccess || loginMutation.isPending}
           >
-            Login 
+            Login
           </Button>
           <a href="/register" className="hover:underline">
             Ainda não tem uma conta? Se inscreva aqui
