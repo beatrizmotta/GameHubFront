@@ -1,8 +1,16 @@
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "../ui/navigation-menu";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "../ui/navigation-menu";
 import logo from "../../assets/logos/logo-color-stacked.svg";
-
+import useUser from "../../stores/useUserStore";
 
 export const NavbarMenu = () => {
+  const { user, logoutUser } = useUser();
 
   return (
     <NavigationMenu className={"p-3 flex min-w-full"}>
@@ -22,15 +30,24 @@ export const NavbarMenu = () => {
           <NavigationMenuLink>Quem somos</NavigationMenuLink>
         </NavigationMenuItem>
 
-        <NavigationMenuList className={"justify-end"}>
+        {!user ? (
+          <NavigationMenuList className={"justify-end"}>
             <NavigationMenuItem>
-                <NavigationMenuLink href="/register">Se inscrever</NavigationMenuLink>
+              <NavigationMenuLink href="/register">
+                Se inscrever
+              </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-                <NavigationMenuLink href="/login">Entrar</NavigationMenuLink>
+              <NavigationMenuLink href="/login">Entrar</NavigationMenuLink>
             </NavigationMenuItem>
-        </NavigationMenuList>
-    
+          </NavigationMenuList>
+        ) : (
+          <NavigationMenuList className={"justify-end"}>
+            <NavigationMenuItem>
+              <NavigationMenuLink onClick={logoutUser}>Sair</NavigationMenuLink>
+            </NavigationMenuItem>
+          </NavigationMenuList>
+        )}
       </NavigationMenuList>
     </NavigationMenu>
   );

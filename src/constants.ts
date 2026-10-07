@@ -1,0 +1,1 @@
+export const GMH_TOKEN_KEY = "ghm_token";

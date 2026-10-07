@@ -5,11 +5,11 @@ import { NavbarMenu } from "../../components/navbar-menu/NavbarMenu";
 export const MainLayout = () => {
 
 
+
   return (
     <SidebarProvider>
       <div className="w-full">
         <NavbarMenu />
-
         <Outlet />
       </div>
     </SidebarProvider>
