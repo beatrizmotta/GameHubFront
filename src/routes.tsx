@@ -6,6 +6,9 @@ import { Login } from "./pages/login/Login";
 import { ForgotPassword } from "./pages/forgot-password/ForgotPassword";
 import { ChangePassword } from "./pages/change-password/ChangePassword";
 import { Dashboard } from "./pages/dashboard/Dashboard";
+import { Chat } from "./pages/chat/Chat";
+import { WaitingRoom } from "./pages/waiting-room/WaitingRoom";
+import { Room } from "./pages/room/Room";
 
 const routes = createBrowserRouter([
   {
@@ -30,6 +33,23 @@ const routes = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/chat",
+        element: <Chat />,
+      },
+      {
+        path: "/room",
+        children: [
+          {
+            path: "join/:id",
+            element: <WaitingRoom />,
+          },
+          {
+            path: ":id",
+            element: <Room />,
+          },
+        ],
       },
       {
         path: "/",

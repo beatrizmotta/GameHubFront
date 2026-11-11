@@ -23,7 +23,7 @@ export const NavbarMenu = () => {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Jogos</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <NavigationMenuLink>Flip 7</NavigationMenuLink>
+            <NavigationMenuLink href="/dashboard">Flip 7</NavigationMenuLink>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
